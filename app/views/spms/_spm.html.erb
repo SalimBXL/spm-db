@@ -1,0 +1,24 @@
+<tr id="spm_<%= spm.id %>">
+
+    <td><%= spm.study_date %></td>
+
+    <td><%= spm.patient_id %></td>
+
+    <td><%= spm.spm_base %></td>
+    <td>[mirror]</td>
+
+    <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
+            data-toggle="tooltip" title="Edit spm">
+            <span class="material-icons">edit</span>
+        </a></td>
+    
+    <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
+            spm_path(spm),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete spm for patient #{spm.patient_id} ?" },
+            class: "btn btn-danger btn-sm" 
+        %></td>
+
+    
+</tr>

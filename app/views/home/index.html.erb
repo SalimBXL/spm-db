@@ -1,0 +1,32 @@
+
+<div class="jumbotron text-center">
+  <h1>SPM DB</h1>
+  <p>SPM's Database</p> 
+</div>
+
+
+<div class="container">
+  <div class="card-deck">
+    <div class="card bg-default">
+      <div class="card-body text-center">
+        <h3><span class="material-icons">people</span> Patients</h3>
+        <p>Show the list of the patients whom get an SPM. From each patient, you can access the studies and SPM files.</p>
+        <a href="<%= patients_path %>" class="btn btn-info" role="button">Link Button</a>
+      </div>
+    </div>
+    <div class="card bg-default">
+      <div class="card-body text-center">
+        <h3><span class="material-icons">list</span> SPM's</h3>
+        <p>Show the list of all the SPM's generated. The newest are on the top of the list.</p>
+        <a href="<%= spms_path %>" class="btn btn-info" role="button">Link Button</a>
+      </div>
+    </div>
+    <div class="card bg-default">
+      <div class="card-body text-center">
+        <h3><span class="material-icons">create_new_folder</span> New SPM</h3>        
+        <p>Create a new SPM. A new entry is created and nothing is deleted if an spm already exists.</p>
+        <a href="<%= spms_path %>" class="btn btn-info" role="button">Link Button</a>
+      </div>
+    </div>
+  </div>
+</div>

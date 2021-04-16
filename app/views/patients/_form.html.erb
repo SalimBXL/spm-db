@@ -1,0 +1,29 @@
+<%= form_with model: @patient, local: true do |form| %>
+
+    <% if @patient.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @patient.errors.full_messages.each do |message| %>
+                <li class="bg-danger"><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+    <!-- Fullname -->
+    <p>
+        <%= form.label :fullname %><br>
+        <%= form.text_field :fullname, placeholder: "Firstname LASTNAME" %>
+    </p>
+
+    <!-- NPP -->
+    <p>
+        <%= form.label :npp %><br>
+        <%= form.text_field :npp, placeholder: "YYMMDDXX00" %>
+    </p>
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+
+<% end %>

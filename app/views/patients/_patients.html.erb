@@ -1,0 +1,13 @@
+<!-- Table paginée -->
+<p><%= paginate @patients, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th>Fullnames</th>
+        <th>NPP</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+<%= render @patients %>
+</table>
+<p><%= paginate @patients, remote: true %></p>

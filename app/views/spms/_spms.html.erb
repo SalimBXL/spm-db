@@ -1,0 +1,15 @@
+
+<!-- Table paginée -->
+<p><%= paginate @spms, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th>Study Date</th>
+        <th>NPP</th>
+        <th>Hypo/Hyper</th>
+        <th>Mirror</th>
+        <th></th>
+        <th></th>
+    </tr>
+<%= render @spms %>
+</table>
+<p><%= paginate @spms, remote: true %></p>

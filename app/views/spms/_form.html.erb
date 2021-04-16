@@ -1,0 +1,45 @@
+<%= form_with model: @spm, local: true do |form| %>
+
+    <% if @spm.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @spm.errors.full_messages.each do |message| %>
+                <li class="bg-danger"><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+    <!-- Patient ID -->
+    <p>
+        <%= form.label :patient_id %><br>
+        <%= select_tag(:patient_id, options_from_collection_for_select(@patients, :id, :fullname)) %>
+        
+    </p>
+
+    <!-- Study Date -->
+    <p>
+        <%= form.label :study_date %><br>
+        <%= form.date_field :study_date %>
+    </p>
+
+    <!-- SPM Base (Hypo/Hyper) -->
+    <p>
+        <%= form.label :spm_base %><br>
+        <%= @spm.spm_base%><br>
+        <%= form.file_field(:spm_base, accept: 'application/pdf') %>
+        
+    </p>
+
+    <!-- SPM Mirror -->
+    <p>
+        <%= form.label :spm_mirror %><br>
+        <%= @spm.spm_mirror %><br>
+        <%= form.file_field(:spm_mirror, accept: 'application/pdf') %>
+    </p>
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+
+<% end %>

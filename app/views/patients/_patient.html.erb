@@ -1,0 +1,33 @@
+<tr id="patient_<%= patient.id %>">
+
+    <td>
+        <% if (patient.npp[6].upcase == "M") %>
+            <span class="material-icons text-primary">male</span>
+        <% elsif (patient.npp[6].upcase == "F") %>
+            <span class="material-icons text-danger">female</span>
+        <% else %>
+            <span class="material-icons text-warning">transgender</span>
+        <% end %>
+        <%= patient.fullname %>
+    </td>
+
+    <td><%= patient.npp %></td>
+
+    <td><a href="<%= edit_patient_path(patient) %>" class="btn btn-info btn-sm" role="button"
+            data-toggle="tooltip" title="Edit patient">
+            <span class="material-icons">edit</span>
+        </a></td>
+    
+    <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
+            patient_path(patient),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete patient #{patient.fullname} ?" },
+            class: "btn btn-danger btn-sm" 
+        %></td>
+
+    <td><a href="<%= spms_path(patient_id: patient) %>" class="btn btn-info btn-sm" role="button"
+            data-toggle="tooltip" title="View SPM's">
+            <span class="material-icons">list</span>
+        </a></td>
+</tr>
