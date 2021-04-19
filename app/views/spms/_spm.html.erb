@@ -1,16 +1,26 @@
 <tr id="spm_<%= spm.id %>">
 
-    <td><%= spm.study_date %></td>
+    <td><%=  I18n.localize(spm.study_date, format: "%d %B %Y") %></td>
 
-    <td><%= spm.patient_id %></td>
+    <% unless @patient %>
+        <td><%= spm.patient.fullname %> <small>(<%= spm.patient.npp %>)</small> </td>
+    <% end %>
 
-    <td><%= spm.spm_base %></td>
-    <td>[mirror]</td>
+    <td><%= spm.spm_base.truncate(30) %></td>
+
+    <td><%= spm.spm_mirror.truncate(30) %></td>
 
     <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
             data-toggle="tooltip" title="Edit spm">
             <span class="material-icons">edit</span>
         </a></td>
+
+    <% unless @patient %>
+        <td><a href="<%= spms_path(patient_id: spm.patient_id) %>" class="btn btn-info btn-sm" role="button"
+                data-toggle="tooltip" title="Patient's SPMs">
+                <span class="material-icons">person</span>
+            </a></td>
+    <% end %>
     
     <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
             spm_path(spm),

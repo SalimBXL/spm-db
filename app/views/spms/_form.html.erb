@@ -13,7 +13,7 @@
     <!-- Patient ID -->
     <p>
         <%= form.label :patient_id %><br>
-        <%= select_tag(:patient_id, options_from_collection_for_select(@patients, :id, :fullname)) %>
+        <%= form.select :patient_id, options_from_collection_for_select(@patients, :id, :fullname, @spm.patient_id ) %>
         
     </p>
 
@@ -27,7 +27,7 @@
     <p>
         <%= form.label :spm_base %><br>
         <%= @spm.spm_base%><br>
-        <%= form.file_field(:spm_base, accept: 'application/pdf') %>
+        <%= form.text_field :spm_base %>
         
     </p>
 
@@ -35,7 +35,7 @@
     <p>
         <%= form.label :spm_mirror %><br>
         <%= @spm.spm_mirror %><br>
-        <%= form.file_field(:spm_mirror, accept: 'application/pdf') %>
+        <%= form.text_field :spm_mirror %>
     </p>
 
     <p>

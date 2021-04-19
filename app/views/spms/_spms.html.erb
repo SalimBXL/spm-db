@@ -4,9 +4,10 @@
 <table class="table table-striped">
     <tr>
         <th>Study Date</th>
-        <th>NPP</th>
+        <% unless @patient %><th>Patient</th><% end %>
         <th>Hypo/Hyper</th>
         <th>Mirror</th>
+        <th></th>
         <th></th>
         <th></th>
     </tr>
