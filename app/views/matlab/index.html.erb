@@ -1,0 +1,57 @@
+<h1>New Matlab SPM</h1>
+
+<div class="container">
+    <br>
+
+    <div class="card" style="width:400px">
+    <div class="card-body">
+        <h4 class="card-title">CAMERA</h4>
+        <p class="card-text">Please click on the button corresponding to the camera of the study for wich you want to create a new SPM.</p>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="p-2">
+                <a href="<%= matlab_path(camera: 1) %>" class="btn btn<%= "-outline" unless @camera == "1" %>-info" role="button">
+                    <span class="material-icons">center_focus_weak</span><br>
+                    PET-CT
+                </a>
+            </div>
+
+            <div class="p-2">
+                <a href="<%= matlab_path(camera: 2) %>" class="btn btn<%= "-outline" unless @camera == "2" %>-info" role="button">
+                    <span class="material-icons">center_focus_weak</span><br>
+                    PET-MR
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <br>
+
+    <div class="card" style="width:400px">
+    <div class="card-body">
+        <h4 class="card-title">MATLAB</h4>
+        <p class="card-text">Press the button below to run Matlab.</p>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="p-2">
+                <a href="<%= start_matlab_path(camera: @camera) %>" 
+                    class="
+                        btn 
+                            btn<%= "-outline" unless @camera %>-success
+                            <%= " disabled "  unless @camera %>
+                        "
+                    role="button">
+                    <span class="material-icons">grid_view</span><br>
+                    START
+                </a>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</div>
+
