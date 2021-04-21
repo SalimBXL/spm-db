@@ -1,7 +1,8 @@
 class MatlabController < ApplicationController
     before_action :get_camera, only: [:index, :start_matlab]
 
-    def index        
+    def index
+        
     end
 
     def start_matlab
@@ -11,6 +12,9 @@ class MatlabController < ApplicationController
     private
 
     def get_camera
+        @cameras = Hash.new
+        @cameras[1] = "PET-CT"
+        @cameras[2] = "PET-MR"
         @camera = params[:camera] if params[:camera]
     end
     
