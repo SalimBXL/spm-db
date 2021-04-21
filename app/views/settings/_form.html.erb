@@ -1,0 +1,29 @@
+<%= form_with model: @setting, local: true do |form| %>
+
+    <% if @setting.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @setting.errors.full_messages.each do |message| %>
+                <li class="bg-danger"><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+    <!-- Key -->
+    <p>
+        <%= form.label :key %><br>
+        <%= form.text_field :key, placeholder: "Key" %>
+    </p>
+
+    <!-- Value -->
+    <p>
+        <%= form.label :value %><br>
+        <%= form.text_field :value, placeholder: "Value" %>
+    </p>
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+
+<% end %>

@@ -1,0 +1,21 @@
+<tr id="setting_<%= setting.id %>">
+
+    <td>[<%= setting.key %>]</td>
+
+    <td>"<%= setting.value %>"</td>
+
+    <td><a href="<%= edit_setting_path(setting) %>" class="btn btn-info btn-sm" role="button"
+            data-toggle="tooltip" title="Edit setting">
+            <span class="material-icons">edit</span>
+        </a></td>
+    
+    <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
+            setting_path(setting),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete setting #{setting.key} ?" },
+            class: "btn btn-danger btn-sm" 
+        %></td>
+
+    
+</tr>

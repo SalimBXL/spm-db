@@ -1,0 +1,13 @@
+<!-- Table paginée -->
+<p><%= paginate @settings, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <%= render @settings %>
+</table>
+<p><%= paginate @settings, remote: true %></p>
