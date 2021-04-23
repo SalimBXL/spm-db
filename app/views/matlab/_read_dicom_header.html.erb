@@ -1,0 +1,27 @@
+
+<div class="container">
+
+    <br>
+
+    <div class="card">
+        <div class="card-body">
+            <dl>
+                <dt>DICOM</dt>
+                <dd>Getting images... <span class="text-success material-icons" id="checked_zip">done</span></dd>
+                <dd>Reading header... <span class="text-success material-icons" id="checked_read">done</span></dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="p-2" id="button_next">
+            <a href="<%= read_dicom_header_path %>" 
+                class="btn btn-success"
+                role="button">
+                <span class="material-icons">navigate_next</span><br>
+                Next
+            </a>
+        </div>
+    </div>
+
+</div>

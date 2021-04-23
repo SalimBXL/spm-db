@@ -1,0 +1,10 @@
+<%= render "header" %>
+<%= render "progress_bar" %>
+<%= render "read_dicom_header" %>
+
+<script>
+    document.getElementById("checked_read").hidden = true;
+    document.getElementById("button_next").hidden = true;
+    window.location.href="<%= read_dicom_header_ok_path %>";
+</script>
+

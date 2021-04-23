@@ -1,0 +1,10 @@
+<%= render "header" %>
+<%= render "progress_bar" %>
+<%= render "get_zip" %>
+
+<script>
+    document.getElementById("checked_zip").hidden = true;
+    document.getElementById("button_next").hidden = true;
+    window.location.href="<%= get_zip_ok_path %>";
+</script>
+
