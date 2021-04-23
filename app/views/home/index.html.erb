@@ -24,13 +24,37 @@
       </div>
     </div>
 
+    <% if request.remote_ip == "127.0.0.1" %>
+      <div class="shadow card bg-default">
+        <div class="card-body text-center">
+          <h3><span class="material-icons">create_new_folder</span> New SPM</h3>        
+          <p>Create a new SPM. A new entry is created and nothing is deleted if an spm already exists.</p>
+          <a href="<%= matlab_path %>" class="btn btn-info" role="button">Start</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="card-deck">
     <div class="shadow card bg-default">
-      <div class="card-body text-center">
-        <h3><span class="material-icons">create_new_folder</span> New SPM</h3>        
-        <p>Create a new SPM. A new entry is created and nothing is deleted if an spm already exists.</p>
-        <a href="<%= matlab_path %>" class="btn btn-info" role="button">Start</a>
+        <div class="card-body text-center">
+          <h3><small>Last SPM's</small></h3>
+          <div class="row">
+            <% @lasts.each do |last| %>
+              <div class="col-sm-3">
+                <small>
+                <%= link_to "#{last.patient.fullname} (#{I18n.localize(last.study_date, format: '%d %B %Y')})", spms_path(patient_id: last.patient_id) %>
+                
+                </small>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>

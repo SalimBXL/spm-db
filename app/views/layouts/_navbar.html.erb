@@ -13,21 +13,26 @@
                 <span class="material-icons">list</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<%= matlab_path %>"
-                data-toggle="tooltip" title="New SPM">
-                <span class="material-icons">create_new_folder</span>
-            </a>
-        </li>
+
+        <% if request.remote_ip == "127.0.0.1" %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%= matlab_path %>"
+                    data-toggle="tooltip" title="New SPM">
+                    <span class="material-icons">create_new_folder</span>
+                </a>
+            </li>
+        <% end %>
 
     </ul>
 
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item" style="float:right">
-            <a class="nav-link" href="<%= settings_path %>"
-                data-toggle="tooltip" title="Settings">
-                <span class="material-icons">settings</span>
-            </a>
-        </li>
-    </ul>
+    <% if request.remote_ip == "127.0.0.1" %>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" style="float:right">
+                <a class="nav-link" href="<%= settings_path %>"
+                    data-toggle="tooltip" title="Settings">
+                    <span class="material-icons">settings</span>
+                </a>
+            </li>
+        </ul>
+    <% end %>
 </nav>

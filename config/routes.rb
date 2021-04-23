@@ -11,9 +11,16 @@ Rails.application.routes.draw do
   get "/read_dicom_header_ok", to: "matlab#read_dicom_header_ok"
 
   get "/start_matlab", to: "matlab#start_matlab"
-  get "/add_pdf_to_db", to: "matlab#add_pdf_to_db"
-  get "/remove_dicom_entry", to: "matlab#remove_dicom_entry"
+  get "/start_matlab_ok", to: "matlab#start_matlab_ok"
 
+  get "/add_pdf_to_db", to: "matlab#add_pdf_to_db"
+  get "/add_pdf_to_db_ok", to: "matlab#add_pdf_to_db_ok"
+
+  get "/remove_dicom_entry", to: "matlab#remove_dicom_entry"
+  get "/remove_dicom_entry_ok", to: "matlab#remove_dicom_entry_ok"
+
+  get "/finished", to: "matlab#finished"
+  
 
   resources :spms
   resources :patients

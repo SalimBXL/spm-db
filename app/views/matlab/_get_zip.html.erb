@@ -1,30 +1,46 @@
 
 <div class="container">
 
-<div class="row">
-
     <br>
 
-    <div class="">
-        <div class="card">
-            <div class="card-body">
-                <dl>
-                    <dt>DICOM</dt>
-                    <dd>Getting images... <span class="text-success material-icons" id="checked_zip">done</span></dd>
-                </dl>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <dl>
+                        <dt>CAMERA</dt>
+                        <dd>Getting camera... <span class="text-success material-icons" id="checked_camera">done</span></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <dl>
+                        <dt>DICOM</dt>
+                        <dd>Getting images... <span class="text-success material-icons" id="checked_zip">done</span></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <div class="p-2" id="button_next">
+                    <a href="<%= read_dicom_header_path %>" 
+                        class="btn btn-info"
+                        role="button">
+                        <span class="material-icons">navigate_next</span><br>
+                        Next
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="d-flex justify-content-center">
-        <div class="p-2" id="button_next">
-            <a href="<%= read_dicom_header_path %>" 
-                class="btn btn-success"
-                role="button">
-                <span class="material-icons">navigate_next</span><br>
-                Next
-            </a>
-        </div>
-    </div>
-
 </div>

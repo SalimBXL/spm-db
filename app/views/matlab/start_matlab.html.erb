@@ -1,58 +1,10 @@
 <%= render "header" %>
 <%= render "progress_bar" %>
+<%= render "start_matlab" %>
 
-<br>
+<script>
+    document.getElementById("checked_matlab").hidden = true;
+    document.getElementById("button_next").hidden = true;
+    window.location.href="<%= start_matlab_ok_path %>";
+</script>
 
-<div class="card">
-    <div class="card-body">
-        <dl>
-            <dt>DICOM</dt>
-            <dd>Getting images... <code>[TODO results]</code></dd>
-            <dd>Getting patient ID... <code>[TODO results]</code></dd>
-        </dl>
-    </div>
-</div>
-
-<br>
-
-<div class="card">
-    <div class="card-body">
-        <dl>
-            <dt>DATA</dt>
-            camera = <%= @cameras[@camera.to_i] %><br>
-            depository = <%= study_path("YYMMDDxx00", Date.today) %><br>
-            Patient ID = <code>[TODO]</code>
-        </dl>
-    </div>
-</div>
-
-<br>
-
-<div class="card">
-    <div class="card-body">
-        <dl>
-            <dt>MATALAB</dt>
-            <dd>Starting Matlab... <code>[TODO]</code></dd>
-        </dl>
-    </div>
-</div>
-
-<br>
-
-<div class="card">
-    <div class="card-body">
-        <dl>
-            <dt>DATABASE</dt>
-            <dd>Checking PDF's... <code>[TODO]</code></dd>
-            <dd>Adding into database... <code>[TODO]</code></dd>
-        </dl>
-    </div>
-</div>
-
-<br>
-
-<a href="<%= %>" class="mx-auto btn btn-info" role="button">Next</a>
-
-<hr>
-value : <%= @value %><br>
-wasGood : <%= @wasGood %> - <%= @wasGood2 %>

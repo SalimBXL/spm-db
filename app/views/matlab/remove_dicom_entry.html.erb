@@ -1,0 +1,10 @@
+<%= render "header" %>
+<%= render "progress_bar" %>
+<%= render "remove_dicom_entry" %>
+
+<script>
+    document.getElementById("checked_remove").hidden = true;
+    document.getElementById("button_next").hidden = true;
+    window.location.href="<%= remove_dicom_entry_ok_path %>";
+</script>
+

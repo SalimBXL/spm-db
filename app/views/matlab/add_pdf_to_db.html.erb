@@ -1,0 +1,10 @@
+<%= render "header" %>
+<%= render "progress_bar" %>
+<%= render "add_pdf_to_db" %>
+
+<script>
+    document.getElementById("checked_pdf").hidden = true;
+    document.getElementById("button_next").hidden = true;
+    window.location.href="<%= add_pdf_to_db_ok_path %>";
+</script>
+
