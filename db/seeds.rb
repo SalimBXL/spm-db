@@ -10,7 +10,8 @@ settings = Setting.create([
     {key: 'depository', value: '/home/pet/database'}, 
     {key: 'file_spm_base', value: 'SPM_basic.pdf'}, 
     {key: 'file_spm_mirror', value: 'SPM_mirror.pdf'}, 
-    {key: 'xterm', value: '/usr/bin/xterm'}
+    {key: 'xterm', value: '/usr/bin/xterm'},
+    {key: 'download_directory', value: '/home/pet/downloads'}
 ])
 
 patients = Patient.create([

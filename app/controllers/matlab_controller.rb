@@ -1,10 +1,17 @@
 class MatlabController < ApplicationController
     before_action :get_camera, only: [:index, :start_matlab]
 
+    #############
+    #   INDEX   #
+    #############
     def index
         @progression = get_progression(1, 13)
     end
 
+
+    #########################
+    #   READ DICOM HEADER   #
+    #########################
     def read_dicom_header
         @progression = get_progression(2, 13)
     end
@@ -12,30 +19,19 @@ class MatlabController < ApplicationController
     def read_dicom_header_ok
         @progression = get_progression(3, 13)
         @res = false
+
         # liste patients
-        puts "********************"
-        puts "LIST PATIENTS :"        
         patients = find_orthanc_patients
-        puts "Patients : "
-        puts patients
-        puts "********************"
         if patients
+
             # dernier patient
-            puts "********************"
-            puts "LAST PATIENT : "
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
             dernier_patient = dernier_patient["MainDicomTags"]
-            puts "=> #{dernier_patient}"
-            puts "********************"
             if dernier_patient
+
                 # patient id
-                puts "********************"
-                puts "PATIENT ID : "
                 @patient_id = dernier_patient["PatientID"]
                 @patient_name = dernier_patient["PatientName"]
-                puts @patient_id
-                puts @patient_name
-                puts "********************"
                 if @patient_id and @patient_name
                     @res = true
                 end
@@ -43,21 +39,44 @@ class MatlabController < ApplicationController
         end
     end
 
+
+    #################
+    #   GET ZIP     #
+    #################
     def get_zip
         @progression = get_progression(5, 13)
     end
 
     def get_zip_ok
         @progression = get_progression(6, 13)
+        @res = false
+        
+        # liste patients
+        patients = find_orthanc_patients
+        if patients
+
+            # dernier patient
+            dernier_patient = get_orthanc_zip(patients[patients.length-1])
+            if dernier_patient
+
+                
+            end
+
+        end
         
 
         # Check if zipfile is present
-        working_dir = "/home/salim/Téléchargements/"
+        working_dir = "/home/pet/downloads/"
         zipfiles = File.join(working_dir, "*.zip")
         zips = Dir.glob(zipfiles)
-        #@res = (zips.length == 1) ? true : false
+        @res = (zips.length == 1) ? true : false
+        @error_message = (zips.length == 1) ? nil : "ZIP file not found in #{working_dir}"
     end
 
+
+    #####################
+    #   START MATLAB    #
+    #####################
     def start_matlab
         @progression = get_progression(7, 13)
     end
@@ -71,6 +90,10 @@ class MatlabController < ApplicationController
         #@wasGood2 = $?
     end
 
+
+    #####################
+    #   ADD PDF TO DB   #
+    #####################
     def add_pdf_to_db
         @progression = get_progression(9, 13)
     end
@@ -82,6 +105,10 @@ class MatlabController < ApplicationController
         @value = %x( #{xterm} "#{comm}" )
     end
 
+
+    #########################
+    #   REMOVE DICOM ENTRY  #
+    #########################
     def remove_dicom_entry
         @progression = get_progression(11, 13)
     end
@@ -93,6 +120,10 @@ class MatlabController < ApplicationController
         @value = %x( #{xterm} "#{comm}" )
     end
 
+
+    #################
+    #   FINISHED    #
+    #################
     def finished
         @progression = get_progression(13, 13)
     end
@@ -110,6 +141,8 @@ class MatlabController < ApplicationController
     def get_progression(etape, etapes)
         (etape == etapes) ? 100 : ( (100 / (etapes) ) * (etape) )
     end
+
+    ##### ORTHANC #####
 
     def request_api(url)
         begin
@@ -131,6 +164,10 @@ class MatlabController < ApplicationController
 
     def find_orthanc_dernier_patient(id)
         request_api(File.join("http://127.0.0.1:8042/patients", id))
+    end
+
+    def get_orthanc_zip(patient_id)
+        request_api(File.join("http://127.0.0.1:8042/patients", id, "archive"))
     end
 
 end
