@@ -15,6 +15,7 @@ class MatlabController < ApplicationController
     #########################
     def read_dicom_header
         @progression = get_progression(2, 13)
+        session[:camera] = params[:camera] if params[:camera]
     end
 
     def read_dicom_header_ok
@@ -88,10 +89,12 @@ class MatlabController < ApplicationController
         @progression = get_progression(8, 13)
 
         #generateing startup.m
-        script = (session[:camera] == "1") ? @cam1_script : @cam2_script
+        script = "test"
+        script = @cam1_script if session[:camera] == "1"
+        script = @cam2_script if session[:camera] == "2"
         File.open(@startup_matlab, "w") do |f|
-            f.write("cd #{@scripts_matlab}")
-            f.write(script)
+            f.puts("cd #{@scripts_matlab}")
+            f.puts(script)
             f.close
         end
         startup = Dir.glob(@startup_matlab)
