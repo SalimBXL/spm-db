@@ -64,9 +64,25 @@ class MatlabController < ApplicationController
                 chemin = File.join("127.0.0.1", "patients", id, "archive")
                 download = File.join("/home/pet/Downloads", "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
+
+                puts "***************"
+                puts "***************"
+                puts "id : #{id}"
+                puts "patient_id : #{patient_id}"
+                puts "xterm : #{xterm}"
+                puts "chemin : #{chemin}"
+                puts "download : #{download}"
+                puts "comm : #{comm}"
+                puts "***************"
+                
                 @value = %x( #{xterm} "#{comm}" )
-                #@wasGood = system( "#{xterm} '#{comm}'" )
                 @wasGood2 = $?
+                puts "***************"
+                puts "***************"
+                puts "@value : #{@value}"
+                puts "@wasGood2 : #{@wasGood2}"
+                #@wasGood = system( "#{xterm} '#{comm}'" )
+                
             end
 
         end
