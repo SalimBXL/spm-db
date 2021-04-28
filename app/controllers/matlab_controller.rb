@@ -166,7 +166,7 @@ class MatlabController < ApplicationController
         request_api(File.join("http://127.0.0.1:8042/patients", id))
     end
 
-    def get_orthanc_zip(patient_id)
+    def get_orthanc_zip(id)
         request_api(File.join("http://127.0.0.1:8042/patients", id, "archive"))
     end
 
