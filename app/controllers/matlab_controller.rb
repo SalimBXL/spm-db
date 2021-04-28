@@ -1,5 +1,6 @@
 class MatlabController < ApplicationController
     before_action :get_camera, only: [:index, :start_matlab]
+    before_action :get_config, only: [:get_zip_ok, :start_matlab_ok]
 
     #############
     #   INDEX   #
@@ -51,16 +52,6 @@ class MatlabController < ApplicationController
         @progression = get_progression(6, 13)
         @res = false
 
-        # recupère depuis la config
-        settings = Hash.new
-        Setting.all.find_each do |setting|
-            settings[setting[:key]] = setting[:value]
-        end
-        url = settings['dicom_server_url']
-        xterm = settings['xterm']
-        download_dir = settings['download_directory']
-        
-        
         # liste patients
         patients = find_orthanc_patients
         if patients
@@ -70,17 +61,17 @@ class MatlabController < ApplicationController
             if dernier_patient
                 id = dernier_patient["ID"]
                 patient_id = dernier_patient["MainDicomTags"]["PatientID"]
-                chemin = File.join(url, "patients", id, "archive")
-                download = File.join(download_dir, "#{patient_id}.zip")
+                chemin = File.join(@url, "patients", id, "archive")
+                download = File.join(@download_dir, "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
-                @value = %x( #{xterm} "#{comm}" )
+                @value = %x( #{@xterm} "#{comm}" )
                 @wasGood2 = $?
                 #@wasGood = system( "#{xterm} '#{comm}'" )
                 # Check if zipfile is present
-                zipfiles = File.join(download_dir, "*.zip")
+                zipfiles = File.join(@download_dir, "*.zip")
                 zips = Dir.glob(zipfiles)
                 @res = (zips.length == 1) ? true : false
-                @error_message = (zips.length == 1) ? nil : "ZIP file not found in #{download_dir}"
+                @error_message = (zips.length == 1) ? nil : "ZIP file not found in #{@download_dir}"
             end
         end
     end
@@ -95,11 +86,21 @@ class MatlabController < ApplicationController
 
     def start_matlab_ok
         @progression = get_progression(8, 13)
-        xterm = "xterm -e"
-        comm = "top ; wait"
-        @value = %x( #{xterm} "#{comm}" )
+        comm = "#{@matlab} ; wait"
+
+        puts "***************"
+        puts "***************"
+        puts "comm : #{comm}"
+        puts "***************"
+
+        @value = %x( #{@xterm} "#{comm}" )
         #@wasGood = system( "#{xterm} '#{comm}'" )
-        #@wasGood2 = $?
+        @wasGood2 = $?
+
+        puts "***************"
+        puts "@value : #{@value}"
+        puts "@wasGood2 : #{@wasGood}"
+        
     end
 
 
@@ -141,7 +142,21 @@ class MatlabController < ApplicationController
     end
 
 
+    ################################################################################
+
     private
+
+    def get_config
+        # recupère depuis la config
+        settings = Hash.new
+        Setting.all.find_each do |setting|
+            settings[setting[:key]] = setting[:value]
+        end
+        @url = settings['dicom_server_url']
+        @xterm = settings['xterm']
+        @download_dir = settings['download_directory']
+        @matlab = settings['matlab']
+    end
 
     def get_camera
         @cameras = Hash.new

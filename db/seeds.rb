@@ -10,7 +10,7 @@ settings = Setting.create([
     {key: 'depository', value: '/home/pet/database'}, 
     {key: 'file_spm_base', value: 'SPM_basic.pdf'}, 
     {key: 'file_spm_mirror', value: 'SPM_mirror.pdf'}, 
-    {key: 'xterm -e', value: '/usr/bin/xterm'},
+    {key: 'xterm', value: 'xterm -e'},
     {key: 'download_directory', value: '/home/pet/Downloads'},
     {key: 'dicom_server_url', value: '127.0.0.1:8042'}
 ])
