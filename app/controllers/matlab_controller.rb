@@ -13,13 +13,26 @@ class MatlabController < ApplicationController
         @progression = get_progression(3, 13)
         @res = false
         # liste patients
+        puts "********************"
+        puts "LIST PATIENTS :"        
         patients = find_orthanc_patients
+        puts "Patients : "
+        puts patients
+        puts "********************"
         if patients
             # dernier patient
+            puts "********************"
+            puts "LAST PATIENT : "
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
+            puts "=> #{dernier_patient}"
+            puts "********************"
             if dernier_patient
                 # patient id
+                puts "********************"
+                puts "PATIENT ID : "
                 patient_id = nil
+                puts patient_id
+                puts "********************"
                 if patient_id
                     @res = true
                 end
@@ -110,11 +123,11 @@ class MatlabController < ApplicationController
     end
 
     def find_orthanc_patients
-        request_api("127.0.0.1:8042/patients")
+        request_api("http://127.0.0.1:8042/patients")
     end
 
     def find_orthanc_dernier_patient(id)
-        request_api(File.join("127.0.0.1:8042/patients", id))
+        request_api(File.join("http://127.0.0.1:8042/patients", id))
     end
 
 end
