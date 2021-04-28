@@ -56,7 +56,7 @@ class MatlabController < ApplicationController
         if patients
 
             # dernier patient
-            dernier_patient = get_orthanc_zip(patients[patients.length-1])
+            dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
             if dernier_patient
                 xterm = "xterm -e"
                 chemin = File.join("127.0.0.1", "patients", dernier_patient, "archive")
@@ -169,10 +169,6 @@ class MatlabController < ApplicationController
 
     def find_orthanc_dernier_patient(id)
         request_api(File.join("http://127.0.0.1:8042/patients", id))
-    end
-
-    def get_orthanc_zip(id)
-        request_api(File.join("http://127.0.0.1:8042/patients", id, "archive"))
     end
 
 end
