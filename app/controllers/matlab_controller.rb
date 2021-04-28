@@ -16,6 +16,10 @@ class MatlabController < ApplicationController
     def read_dicom_header
         @progression = get_progression(2, 13)
         session[:camera] = params[:camera] if params[:camera]
+        puts "*************"
+        puts "*************"
+        puts "params : #{params}"
+        puts "*************"
     end
 
     def read_dicom_header_ok
@@ -169,9 +173,13 @@ class MatlabController < ApplicationController
     end
 
     def get_camera
+        settings = Hash.new
+        Setting.all.find_each do |setting|
+            settings[setting[:key]] = setting[:value]
+        end
         @cameras = Hash.new
-        @cameras[1] = "PET-CT"
-        @cameras[2] = "PET-MR"
+        @cameras[1] = settings['cam1_nom']
+        @cameras[2] = settings['cam2_nom']
         @camera = params[:camera] if params[:camera]
     end
 
