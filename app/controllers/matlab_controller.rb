@@ -76,7 +76,7 @@ class MatlabController < ApplicationController
                 puts "comm : #{comm}"
                 puts "***************"
                 
-                
+
                 @value = %x( #{xterm} "#{comm}" )
                 @wasGood2 = $?
                 puts "***************"
@@ -91,7 +91,7 @@ class MatlabController < ApplicationController
         
 
         # Check if zipfile is present
-        working_dir = "/home/pet/downloads/"
+        working_dir = "/home/pet/Downloads/"
         zipfiles = File.join(working_dir, "*.zip")
         zips = Dir.glob(zipfiles)
         @res = (zips.length == 1) ? true : false
