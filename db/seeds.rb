@@ -16,7 +16,7 @@ settings = Setting.create([
     {key: 'dicom_server_url', value: '127.0.0.1:8042'},
     {key: 'matlab', value: 'matlab'},
     {key: 'scripts_matlab', value: '/home/pet/spm/scripts_matlab'},
-    {key: 'startup_matlab', value: '/home/pet/spm/startup.m'},
+    {key: 'startup_matlab', value: '/home/pet/Documents/MATLAB/startup.m'},
     {key: 'cam1_nom', value: 'PET-CT'},
     {key: 'cam1_script', value: 'all_petct'},
     {key: 'cam2_nom', value: 'PET-MR'},

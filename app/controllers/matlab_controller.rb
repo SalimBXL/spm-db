@@ -92,30 +92,22 @@ class MatlabController < ApplicationController
         script = "test"
         script = @cam1_script if session[:camera] == "1"
         script = @cam2_script if session[:camera] == "2"
-
-        puts "***************"
-        puts "***************"
-        puts "params : #{params}"
-        puts "session : #{session}"
-        puts "script : #{script}"
-        puts "@startup_matlab : #{@startup_matlab}"
-        puts "@scripts_matlab : #{@scripts_matlab}"
-        puts "***************"
-
         File.open(@startup_matlab, "w") do |f|
             f.puts("cd #{@scripts_matlab}")
             f.puts(script)
             f.close
         end
         startup = Dir.glob(@startup_matlab)
-        @res = (startup.length == 1) ? true : false
+        res = (startup.length == 1) ? true : false
         @error_message = (startup.length == 1) ? nil : "Startup file not found (#{@startup_matlab})"
         
-        if @res
-            #comm = "#{@matlab} ; wait"
-            comm = "top ; wait"
+        # Starting matlab
+        if res
+            comm = "#{@matlab} ; wait"
+            #comm = "top ; wait"
             @value = %x( #{@xterm} "#{comm}" )
             @wasGood2 = $?
+            @res = true
         end
     end
 
