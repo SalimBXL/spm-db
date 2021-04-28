@@ -31,9 +31,10 @@ class MatlabController < ApplicationController
                 # patient id
                 puts "********************"
                 puts "PATIENT ID : "
-                @patient_id = dernier_patient["Patient_ID"]
+                @patient_id = dernier_patient["PatientID"]
                 @patient_name = dernier_patient["PatientName"]
                 puts @patient_id
+                puts @patient_name
                 puts "********************"
                 if @patient_id and @patient_name
                     @res = true
