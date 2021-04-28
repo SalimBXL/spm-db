@@ -76,6 +76,7 @@ class MatlabController < ApplicationController
                 puts "comm : #{comm}"
                 puts "***************"
                 
+                
                 @value = %x( #{xterm} "#{comm}" )
                 @wasGood2 = $?
                 puts "***************"
