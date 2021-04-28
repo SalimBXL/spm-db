@@ -2,8 +2,18 @@
 <%= render "progress_bar" %>
 <%= render "get_zip" %>
 
+<h1>RES : <%= @res %></h1>
+
 <script>
-    document.getElementById("checked_zip").hidden = false;
-    document.getElementById("button_next").hidden = false;
+    <% if @res %>
+        document.getElementById("checked_zip").hidden = false;
+        document.getElementById("error_zip").hidden = true;
+        document.getElementById("button_next").hidden = false;
+    <% else %>
+        document.getElementById("checked_zip").hidden = true;
+        document.getElementById("error_zip").hidden = false;
+        document.getElementById("button_next").hidden = true;
+    <% end %>
 </script>
+
 

@@ -8,7 +8,7 @@
 
     <td><%= spm.spm_base.truncate(30) %></td>
 
-    <td><%= spm.spm_mirror.truncate(30) %></td>
+    <td><%= spm.spm_mirror.truncate(30) if spm.spm_mirror %></td>
 
     <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
             data-toggle="tooltip" title="Edit spm">
