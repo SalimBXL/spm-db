@@ -50,6 +50,16 @@ class MatlabController < ApplicationController
     def get_zip_ok
         @progression = get_progression(6, 13)
         @res = false
+
+        # recupère depuis la config
+        settings = Hash.new
+        Setting.all.find_each do |setting|
+            settings[setting[:key]] = setting[:value]
+        end
+        url = settings['dicom_server_url']
+        xterm = settings['xterm']
+        download_dir = settings['download_directory']
+        
         
         # liste patients
         patients = find_orthanc_patients
@@ -60,42 +70,19 @@ class MatlabController < ApplicationController
             if dernier_patient
                 id = dernier_patient["ID"]
                 patient_id = dernier_patient["MainDicomTags"]["PatientID"]
-                xterm = "xterm -e"
-                chemin = File.join("127.0.0.1:8042", "patients", id, "archive")
-                download = File.join("/home/pet/Downloads", "#{patient_id}.zip")
+                chemin = File.join(url, "patients", id, "archive")
+                download = File.join(download_dir, "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
-
-                
-                puts "***************"
-                puts "***************"
-                puts "id : #{id}"
-                puts "patient_id : #{patient_id}"
-                puts "xterm : #{xterm}"
-                puts "chemin : #{chemin}"
-                puts "download : #{download}"
-                puts "comm : #{comm}"
-                puts "***************"
-                
-
                 @value = %x( #{xterm} "#{comm}" )
                 @wasGood2 = $?
-                puts "***************"
-                puts "***************"
-                puts "@value : #{@value}"
-                puts "@wasGood2 : #{@wasGood2}"
                 #@wasGood = system( "#{xterm} '#{comm}'" )
-                
+                # Check if zipfile is present
+                zipfiles = File.join(download_dir, "*.zip")
+                zips = Dir.glob(zipfiles)
+                @res = (zips.length == 1) ? true : false
+                @error_message = (zips.length == 1) ? nil : "ZIP file not found in #{download_dir}"
             end
-
         end
-        
-
-        # Check if zipfile is present
-        working_dir = "/home/pet/Downloads/"
-        zipfiles = File.join(working_dir, "*.zip")
-        zips = Dir.glob(zipfiles)
-        @res = (zips.length == 1) ? true : false
-        @error_message = (zips.length == 1) ? nil : "ZIP file not found in #{working_dir}"
     end
 
 
