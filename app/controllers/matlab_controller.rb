@@ -86,21 +86,24 @@ class MatlabController < ApplicationController
 
     def start_matlab_ok
         @progression = get_progression(8, 13)
-        comm = "#{@matlab} ; wait"
 
-        puts "***************"
-        puts "***************"
-        puts "comm : #{comm}"
-        puts "***************"
-
-        @value = %x( #{@xterm} "#{comm}" )
-        #@wasGood = system( "#{xterm} '#{comm}'" )
-        @wasGood2 = $?
-
-        puts "***************"
-        puts "@value : #{@value}"
-        puts "@wasGood2 : #{@wasGood}"
+        #generateing startup.m
+        script = (session[:camera] == "1") ? @cam1_script : @cam2_script
+        File.open(@startup_matlab, "w") do |f|
+            f.write("cd #{@scripts_matlab}")
+            f.write(script)
+            f.close
+        end
+        startup = Dir.glob(@startup_matlab)
+        @res = (startup.length == 1) ? true : false
+        @error_message = (startup.length == 1) ? nil : "Startup file not found (#{@startup_matlab})"
         
+        if @res
+            comm = "#{@matlab} ; wait"
+            @value = %x( #{@xterm} "#{comm}" )
+            #@wasGood = system( "#{xterm} '#{comm}'" )
+            @wasGood2 = $?
+        end
     end
 
 
@@ -156,6 +159,10 @@ class MatlabController < ApplicationController
         @xterm = settings['xterm']
         @download_dir = settings['download_directory']
         @matlab = settings['matlab']
+        @startup_matlab = settings['startup_matlab']
+        @scripts_matlab = settings['scripts_matlab']
+        @cam1_script = settings['cam1_script']
+        @cam2_script = settings['cam2_script']
     end
 
     def get_camera
