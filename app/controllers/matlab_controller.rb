@@ -105,17 +105,16 @@ class MatlabController < ApplicationController
         if response.status != 200
             @error_message = "Response status : #{response.status}"
             return nil
-        else 
-            JSON.parse(response.body)
         end
+        JSON.parse(response.body)
     end
 
     def find_orthanc_patients
-        request_api("http://127.0.0.1:8042/patients")
+        request_api("127.0.0.1:8042/patients")
     end
 
     def find_orthanc_dernier_patient(id)
-        request_api(File.join("http://127.0.0.1:8042/patients", id))
+        request_api(File.join("127.0.0.1:8042/patients", id))
     end
 
 end

@@ -11,14 +11,14 @@ echo "  "
 echo "***********************************"
 echo "  Modification de 'database.yaml'  "
 echo "***********************************"
-cp /home/pet/spm-db/spm-db/install/orga_clone_material/database.yml /home/pet/spm-db/spm-db/config/database.yml
+cp /home/pet/spm-db/spm-db/install/spm-db_clone_material/database.yml /home/pet/spm-db/spm-db/config/database.yml
 sudo chmod -R 777 /home/pet/spm-db/spm-db/
 echo "  "
 echo "********************"
 echo "  Update des GEM's  "
 echo "********************"
 bundle install
-sudo bundle update
+bundle update
 echo "  "
 echo "**************"
 echo "  Migrations  "
