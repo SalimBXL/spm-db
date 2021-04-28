@@ -58,9 +58,11 @@ class MatlabController < ApplicationController
             # dernier patient
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
             if dernier_patient
+                id = dernier_patient["ID"]
+                patient_id = dernier_patient["MainDicomTags"]["PatientID"]
                 xterm = "xterm -e"
-                chemin = File.join("127.0.0.1", "patients", dernier_patient["ID"], "archive")
-                download = File.join("/home/pet/Downloads", "#{dernier_patient}.zip")
+                chemin = File.join("127.0.0.1", "patients", id, "archive")
+                download = File.join("/home/pet/Downloads", "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
                 @value = %x( #{xterm} "#{comm}" )
                 #@wasGood = system( "#{xterm} '#{comm}'" )
