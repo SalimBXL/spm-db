@@ -99,9 +99,9 @@ class MatlabController < ApplicationController
         @error_message = (startup.length == 1) ? nil : "Startup file not found (#{@startup_matlab})"
         
         if @res
-            comm = "#{@matlab} ; wait"
+            #comm = "#{@matlab} ; wait"
+            comm = "top ; wait"
             @value = %x( #{@xterm} "#{comm}" )
-            #@wasGood = system( "#{xterm} '#{comm}'" )
             @wasGood2 = $?
         end
     end
