@@ -61,10 +61,11 @@ class MatlabController < ApplicationController
                 id = dernier_patient["ID"]
                 patient_id = dernier_patient["MainDicomTags"]["PatientID"]
                 xterm = "xterm -e"
-                chemin = File.join("127.0.0.1", "patients", id, "archive")
+                chemin = File.join("127.0.0.1:8042", "patients", id, "archive")
                 download = File.join("/home/pet/Downloads", "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
 
+                
                 puts "***************"
                 puts "***************"
                 puts "id : #{id}"
