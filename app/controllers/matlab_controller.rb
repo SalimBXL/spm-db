@@ -31,10 +31,11 @@ class MatlabController < ApplicationController
                 # patient id
                 puts "********************"
                 puts "PATIENT ID : "
-                patient_id = nil
-                puts patient_id
+                @patient_id = dernier_patient["Patient_ID"]
+                @patient_name = dernier_patient["PatientName"]
+                puts @patient_id
                 puts "********************"
-                if patient_id
+                if @patient_id and @patient_name
                     @res = true
                 end
             end
