@@ -58,8 +58,13 @@ class MatlabController < ApplicationController
             # dernier patient
             dernier_patient = get_orthanc_zip(patients[patients.length-1])
             if dernier_patient
-
-                
+                xterm = "xterm -e"
+                chemin = File.join("127.0.0.1", "patients", dernier_patient, "archive")
+                download = File.join("/home/pet/Downloads", "#{dernier_patient}.zip")
+                comm = "curl #{chemin} --output #{download}; wait"
+                @value = %x( #{xterm} "#{comm}" )
+                #@wasGood = system( "#{xterm} '#{comm}'" )
+                @wasGood2 = $?
             end
 
         end
