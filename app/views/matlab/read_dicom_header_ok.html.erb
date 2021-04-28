@@ -9,6 +9,12 @@
     </div>
 <% end %>
 
+<% if @res %>
+    <div class="alert alert-info">
+        <%= "#{@patient_name}  (#{@patient_id})" %>
+    </div>
+<% end %>
+
 
 <script>
     <% if @res %>
