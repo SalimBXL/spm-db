@@ -96,9 +96,12 @@ class MatlabController < ApplicationController
         puts "***************"
         puts "***************"
         puts "params : #{params}"
+        puts "session : #{session}"
         puts "script : #{script}"
+        puts "@startup_matlab : #{@startup_matlab}"
+        puts "@scripts_matlab : #{@scripts_matlab}"
         puts "***************"
-        
+
         File.open(@startup_matlab, "w") do |f|
             f.puts("cd #{@scripts_matlab}")
             f.puts(script)
