@@ -62,7 +62,7 @@ class MatlabController < ApplicationController
             if dernier_patient
                 id = dernier_patient["ID"]
                 patient_id = dernier_patient["MainDicomTags"]["PatientID"]
-                chemin = File.join(@url, "patients", id, "archive")
+                chemin = File.join(@url, "patients", id, "media")
                 download = File.join(@download_dir, "#{patient_id}.zip")
                 comm = "curl #{chemin} --output #{download}; wait"
                 @value = %x( #{@xterm} "#{comm}" )
