@@ -29,6 +29,9 @@ class MatlabController < ApplicationController
             # dernier patient
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
             dernier_patient = dernier_patient["MainDicomTags"]
+
+            puts "***** CONTROLLER - dernier_patient : #{dernier_patient}"
+
             if dernier_patient
 
                 # patient id
