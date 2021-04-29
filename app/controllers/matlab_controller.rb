@@ -60,6 +60,7 @@ class MatlabController < ApplicationController
 
                     puts "***** CONTROLLER - patient_study : #{patient_study}"
 
+                    patient_study_date = patient_study["MainDicomTags"]
                     patient_study_date = patient_study["StudyDate"]
 
                     puts "***** CONTROLLER - patient_study_date : #{patient_study_date}"
