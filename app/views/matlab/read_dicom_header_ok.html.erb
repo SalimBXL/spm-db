@@ -11,7 +11,9 @@
 
 <% if @res %>
     <div class="alert alert-info">
-        <%= "#{@patient_name}  (#{@patient_id})" %>
+        <p>
+            <%= "#{session[:patient_name]}  (#{session[:patient_id]})  =>  Study date : #{session[:patient_study_date]}"%>
+        </p>
     </div>
 <% end %>
 

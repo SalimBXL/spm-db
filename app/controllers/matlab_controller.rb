@@ -32,10 +32,22 @@ class MatlabController < ApplicationController
             if dernier_patient
 
                 # patient id
-                @patient_id = dernier_patient["PatientID"]
-                @patient_name = dernier_patient["PatientName"]
-                if @patient_id and @patient_name
-                    @res = true
+                patient_id = dernier_patient["PatientID"]
+                patient_name = dernier_patient["PatientName"]
+                patient_studies = dernier_patient["Studies"]
+                if patient_id and patient_name and patient_studies
+                    session[:patient_id] = patient_id
+                    session[:patient_name] = patient_name
+
+                    # last study
+                    patient_study = patient_studies[patient_studies.length-1]
+                    patient_study = find_orthanc_study(patient_study)
+                    patient_study_date = patient_study["StudyDate"]
+
+                    if patient_study_date
+                        session[:study_date] = patient_study_date
+                        @res = true
+                    end
                 end
             end
         end
@@ -207,6 +219,10 @@ class MatlabController < ApplicationController
 
     def find_orthanc_dernier_patient(id)
         request_api(File.join("http://127.0.0.1:8042/patients", id))
+    end
+
+    def find_orthanc_study(id)
+        request_api(File.join("http://127.0.0.1:8042/studies", id))
     end
 
 end
