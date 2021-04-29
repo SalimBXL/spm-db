@@ -101,6 +101,7 @@ class MatlabController < ApplicationController
 
     def start_matlab_ok
         @progression = get_progression(8, 13)
+        @res = false
 
         #generateing startup.m
         script = "test"
@@ -135,9 +136,30 @@ class MatlabController < ApplicationController
 
     def add_pdf_to_db_ok
         @progression = get_progression(10, 13)
-        xterm = "xterm -e"
-        comm = "top ; wait"
-        @value = %x( #{xterm} "#{comm}" )
+        @res = false
+        
+        # ajouter patient
+        patient = Patient.where(npp: session[patient_id])
+        if patient.size < 1
+            p = Patient.create(fullname: session(:patient_name), npp: session[:patient_id])
+            if p.save
+                # ok
+            else
+                @error_message = "Impossible to create patient."
+            end
+        end
+
+        # ajouter spm
+        spm = Spm.where(patient_id: session[:patient_id], study_date: session[:study_date])
+        if spm.size < 1
+            s = Spm.create(spm_params)
+            if s.save
+                # ok
+                @res = true
+            else
+                @error_message = "Another SPM already exists in the Database."
+            end
+        end
     end
 
 
