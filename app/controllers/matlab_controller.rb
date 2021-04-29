@@ -158,7 +158,7 @@ class MatlabController < ApplicationController
 
             # check si pdfs existent
             dir = File.join(@depository, session[:patient_id], session[:study_date]
-            spms = Dir.glob(dir, "*.pdf"))
+            spms = Dir.glob(dir, "*.pdf")
             @error_message = (spms.length == 2) ? nil : "PDF files not found in #{dir}"
 
             # save 
