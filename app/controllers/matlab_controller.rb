@@ -31,48 +31,23 @@ class MatlabController < ApplicationController
             patient_studies = dernier_patient["Studies"]
             dernier_patient = dernier_patient["MainDicomTags"]
 
-            puts "***** CONTROLLER - dernier_patient : #{dernier_patient}"
-            puts "***** CONTROLLER - patient_studies : #{patient_studies}"
-
             if dernier_patient
 
                 # patient id
                 patient_id = dernier_patient["PatientID"]
                 patient_name = dernier_patient["PatientName"]
-                
-                puts "***** CONTROLLER - patient_id : #{patient_id}"
-                puts "***** CONTROLLER - patient_name : #{patient_name}"
-                puts "***** CONTROLLER - patient_studies : #{patient_studies}"
 
                 if patient_id and patient_name and patient_studies
                     session[:patient_id] = patient_id
                     session[:patient_name] = patient_name
 
-                    puts "***** CONTROLLER - session[:patient_id] : #{session[:patient_id]}"
-                    puts "***** CONTROLLER - session[:patient_name] : #{session[:patient_name]}"
-
                     # last study
                     patient_study = patient_studies[patient_studies.length-1]
-
-                    puts "***** CONTROLLER - patient_study : #{patient_study}"
-
                     patient_study = find_orthanc_study(patient_study)
-
-                    puts "***** CONTROLLER - patient_study : #{patient_study}"
-
                     patient_study = patient_study["MainDicomTags"]
-
-                    puts "***** CONTROLLER - patient_study_date : #{patient_study}"
-
                     patient_study_date = patient_study["StudyDate"]
-
-                    puts "***** CONTROLLER - patient_study_date : #{patient_study_date}"
-
                     if patient_study_date
                         session[:study_date] = patient_study_date
-
-                        puts "***** CONTROLLER - session[:study_date] : #{session[:study_date]}"
-
                         @res = true
                     end
                 end
@@ -227,9 +202,7 @@ class MatlabController < ApplicationController
     ##### ORTHANC #####
 
     def request_api(url)
-        
-        puts "***** CONTROLLER - request_api : #{url}"
-
+        #puts "***** CONTROLLER - request_api : #{url}"
         begin
             response = Excon.get(url)
         rescue => e
