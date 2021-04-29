@@ -1,6 +1,6 @@
 class MatlabController < ApplicationController
     before_action :get_camera, only: [:index, :start_matlab]
-    before_action :get_config, only: [:get_zip_ok, :start_matlab_ok, :add_pdf_to_db_ok]
+    before_action :get_config, only: [:get_zip_ok, :start_matlab_ok, :add_pdf_to_db_ok, :remove_dicom_entry_ok]
 
     #############
     #   INDEX   #
@@ -198,9 +198,13 @@ class MatlabController < ApplicationController
 
     def remove_dicom_entry_ok
         @progression = get_progression(12, 13)
-        xterm = "xterm -e"
-        comm = "top ; wait"
-        @value = %x( #{xterm} "#{comm}" )
+        File.open(@startup_matlab, "w") do |f|
+            f.puts("")
+            f.close
+        end
+        startup = Dir.glob(@startup_matlab)
+        res = (startup.length == 1) ? true : false
+        @error_message = (startup.length == 1) ? nil : "Startup file not found (#{@startup_matlab})"
     end
 
 
