@@ -139,7 +139,7 @@ class MatlabController < ApplicationController
         @res = false
         
         # ajouter patient
-        patient = Patient.where(npp: session[patient_id])
+        patient = Patient.where(npp: session[:patient_id])
         if patient.size < 1
             p = Patient.create(fullname: session(:patient_name), npp: session[:patient_id])
             if p.save
