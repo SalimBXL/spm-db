@@ -168,9 +168,13 @@ class MatlabController < ApplicationController
                     # ok
                     @res = true
                 else
-                    @error_message = "Another SPM already exists in the Database."
+                    @error_message = "Error while saving SPM into database."
                 end
+            else
+                @error_message = "Wrong number of PDF files in #{dir}."
             end
+        else
+            @error_message = "Another SPM already exists in the Database."
         end
     end
 
