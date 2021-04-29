@@ -39,13 +39,19 @@ class MatlabController < ApplicationController
                     session[:patient_id] = patient_id
                     session[:patient_name] = patient_name
 
+                    puts "***** CONTROLLER - session[:patient_id] : #{session[:patient_id]}"
+                    puts "***** CONTROLLER - session[:patient_name] : #{session[:patient_name]}"
+                    
+
                     # last study
                     patient_study = patient_studies[patient_studies.length-1]
                     patient_study = find_orthanc_study(patient_study)
                     patient_study_date = patient_study["StudyDate"]
-
                     if patient_study_date
                         session[:study_date] = patient_study_date
+
+                        puts "***** CONTROLLER - session[:study_date] : #{session[:study_date]}"
+
                         @res = true
                     end
                 end
