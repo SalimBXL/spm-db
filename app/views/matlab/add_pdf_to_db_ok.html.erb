@@ -2,6 +2,12 @@
 <%= render "progress_bar" %>
 <%= render "add_pdf_to_db" %>
 
+<% if @error_message %>
+    <div class="alert alert-danger">
+        <%= @error_message %>
+    </div>
+<% end %>
+
 <script>
     document.getElementById("checked_pdf").hidden = false;
     document.getElementById("button_next").hidden = false;
