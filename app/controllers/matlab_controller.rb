@@ -28,17 +28,18 @@ class MatlabController < ApplicationController
 
             # dernier patient
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
+            patient_studies = dernier_patient["Studies"]
             dernier_patient = dernier_patient["MainDicomTags"]
 
             puts "***** CONTROLLER - dernier_patient : #{dernier_patient}"
+            puts "***** CONTROLLER - patient_studies : #{patient_studies}"
 
             if dernier_patient
 
                 # patient id
                 patient_id = dernier_patient["PatientID"]
                 patient_name = dernier_patient["PatientName"]
-                patient_studies = dernier_patient["Studies"]
-
+                
                 puts "***** CONTROLLER - patient_id : #{patient_id}"
                 puts "***** CONTROLLER - patient_name : #{patient_name}"
                 puts "***** CONTROLLER - patient_studies : #{patient_studies}"
@@ -49,7 +50,6 @@ class MatlabController < ApplicationController
 
                     puts "***** CONTROLLER - session[:patient_id] : #{session[:patient_id]}"
                     puts "***** CONTROLLER - session[:patient_name] : #{session[:patient_name]}"
-                    
 
                     # last study
                     patient_study = patient_studies[patient_studies.length-1]
