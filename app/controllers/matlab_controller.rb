@@ -140,14 +140,17 @@ class MatlabController < ApplicationController
         @res = false
         
         # ajouter patient
-        patient = Patient.where(npp: session[:patient_id])
-        if patient.size < 1
-            p = Patient.create(fullname: session[:patient_name], npp: session[:patient_id])
-            if p.save
+        patients = Patient.where(npp: session[:patient_id])
+        if patients.size < 1
+            patient = Patient.create(fullname: session[:patient_name], npp: session[:patient_id])
+            if patient.save
                 # ok
+                indice_patient = patient.id
             else
                 @error_message = "Impossible to create patient."
             end
+        else
+            indice_patient = patients.first.id
         end
 
         # ajouter spm
@@ -164,12 +167,7 @@ class MatlabController < ApplicationController
                 base = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
                 mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
 
-                puts "***** CONTROLLER - base : #{base}"
-                puts "***** CONTROLLER - mirror : #{mirror}"
-
-                s = Spm.create(patient_id: session[:patient_id], study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
-
-                puts "***** CONTROLLER - s : #{s}"
+                s = Spm.create(patient_id: indice_patient, study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
 
                 if s.save
                     # ok
