@@ -223,6 +223,9 @@ class MatlabController < ApplicationController
     ##### ORTHANC #####
 
     def request_api(url)
+        
+        puts "***** CONTROLLER - request_api : #{url}"
+
         begin
             response = Excon.get(url)
         rescue => e
