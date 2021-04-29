@@ -1,6 +1,6 @@
 class MatlabController < ApplicationController
     before_action :get_camera, only: [:index, :start_matlab]
-    before_action :get_config, only: [:get_zip_ok, :start_matlab_ok]
+    before_action :get_config, only: [:get_zip_ok, :start_matlab_ok, :add_pdf_to_db_ok]
 
     #############
     #   INDEX   #
@@ -82,6 +82,7 @@ class MatlabController < ApplicationController
                 @value = %x( #{@xterm} "#{comm}" )
                 @wasGood2 = $?
                 #@wasGood = system( "#{xterm} '#{comm}'" )
+
                 # Check if zipfile is present
                 zipfiles = File.join(@download_dir, "*.zip")
                 zips = Dir.glob(zipfiles)
@@ -141,7 +142,7 @@ class MatlabController < ApplicationController
         # ajouter patient
         patient = Patient.where(npp: session[:patient_id])
         if patient.size < 1
-            p = Patient.create(fullname: session(:patient_name), npp: session[:patient_id])
+            p = Patient.create(fullname: session[:patient_name], npp: session[:patient_id])
             if p.save
                 # ok
             else
@@ -152,12 +153,23 @@ class MatlabController < ApplicationController
         # ajouter spm
         spm = Spm.where(patient_id: session[:patient_id], study_date: session[:study_date])
         if spm.size < 1
-            s = Spm.create(spm_params)
-            if s.save
-                # ok
-                @res = true
-            else
-                @error_message = "Another SPM already exists in the Database."
+            basic = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
+            mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
+
+            # check si pdfs existent
+            dir = File.join(@depository, session[:patient_id], session[:study_date]
+            spms = Dir.glob(dir, "*.pdf"))
+            @error_message = (spms.length == 2) ? nil : "PDF files not found in #{dir}"
+
+            # save 
+            if (spms.length == 2)
+                s = Spm.create(patient_id: session[:patient_id], study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
+                if s.save
+                    # ok
+                    @res = true
+                else
+                    @error_message = "Another SPM already exists in the Database."
+                end
             end
         end
     end
@@ -196,6 +208,9 @@ class MatlabController < ApplicationController
         Setting.all.find_each do |setting|
             settings[setting[:key]] = setting[:value]
         end
+        @depository = settings['depository']
+        @file_spm_base = settings['file_spm_base']
+        @file_spm_mirror = settings['file_spm_mirror']
         @url = settings['dicom_server_url']
         @xterm = settings['xterm']
         @download_dir = settings['download_directory']
