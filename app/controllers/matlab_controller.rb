@@ -53,8 +53,17 @@ class MatlabController < ApplicationController
 
                     # last study
                     patient_study = patient_studies[patient_studies.length-1]
+
+                    puts "***** CONTROLLER - patient_study : #{patient_study}"
+
                     patient_study = find_orthanc_study(patient_study)
+
+                    puts "***** CONTROLLER - patient_study : #{patient_study}"
+
                     patient_study_date = patient_study["StudyDate"]
+
+                    puts "***** CONTROLLER - patient_study_date : #{patient_study_date}"
+
                     if patient_study_date
                         session[:study_date] = patient_study_date
 
