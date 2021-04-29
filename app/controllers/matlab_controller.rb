@@ -153,8 +153,6 @@ class MatlabController < ApplicationController
         # ajouter spm
         spm = Spm.where(patient_id: session[:patient_id], study_date: session[:study_date])
         if spm.size < 1
-            basic = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
-            mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
 
             # check si pdfs existent
             dir = File.join(@depository, session[:patient_id], session[:study_date])
@@ -163,6 +161,8 @@ class MatlabController < ApplicationController
 
             # save 
             if (spms.length == 2)
+                base = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
+                mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
                 s = Spm.create(patient_id: session[:patient_id], study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
                 if s.save
                     # ok
