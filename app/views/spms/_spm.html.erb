@@ -6,9 +6,13 @@
         <td><%= spm.patient.fullname %> <small>(<%= spm.patient.npp %>)</small> </td>
     <% end %>
 
-    <td><%= link_to spm.spm_base.truncate(30), spm.spm_base %></td>
+    <td><a href="file:///<%= spm.spm_base %>">SPM BASIC</a></td>
 
-    <td><%= link_to spm.spm_mirror.truncate(30), spm.spm_mirror if spm.spm_mirror %></td>
+    <td>
+        <% if spm.spm_mirror %>
+            <a href=file:///"<%= spm.spm_mirror %>">SPM MIRROR</a>
+        <% end %>
+    </td>
 
     <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
             data-toggle="tooltip" title="Edit spm">
