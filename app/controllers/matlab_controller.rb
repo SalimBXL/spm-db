@@ -163,12 +163,24 @@ class MatlabController < ApplicationController
             if (spms.length == 2)
                 base = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
                 mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
+
+                puts "***** CONTROLLER - base : #{base}"
+                puts "***** CONTROLLER - mirror : #{mirror}"
+
                 s = Spm.create(patient_id: session[:patient_id], study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
+
+                puts "***** CONTROLLER - s : #{s}"
+
                 if s.save
                     # ok
                     @res = true
                 else
                     @error_message = "Error while saving SPM into database."
+                    if s.errors.any?
+                        s.errors.full_messages.each do |message|
+                            puts "===>>>> #{message}"
+                        end
+                    end
                 end
             else
                 @error_message = "Wrong number of PDF files in #{dir}."
