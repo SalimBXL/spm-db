@@ -35,6 +35,11 @@ class MatlabController < ApplicationController
                 patient_id = dernier_patient["PatientID"]
                 patient_name = dernier_patient["PatientName"]
                 patient_studies = dernier_patient["Studies"]
+
+                puts "***** CONTROLLER - patient_id : #{patient_id}"
+                puts "***** CONTROLLER - patient_name : #{patient_name}"
+                puts "***** CONTROLLER - patient_studies : #{patient_studies}"
+
                 if patient_id and patient_name and patient_studies
                     session[:patient_id] = patient_id
                     session[:patient_name] = patient_name
