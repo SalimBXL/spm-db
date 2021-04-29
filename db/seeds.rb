@@ -9,7 +9,7 @@
 
 settings = Setting.create([
     {key: 'depository', value: '/home/pet/Database'}, 
-    {key: 'file_spm_base', value: 'SPM_basic.pdf'}, 
+    {key: 'file_spm_base', value: 'SPM_classic.pdf'}, 
     {key: 'file_spm_mirror', value: 'SPM_mirror.pdf'}, 
     {key: 'xterm', value: 'xterm -e'},
     {key: 'download_directory', value: '/home/pet/Downloads'},

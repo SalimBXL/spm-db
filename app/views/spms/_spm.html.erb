@@ -6,11 +6,11 @@
         <td><%= spm.patient.fullname %> <small>(<%= spm.patient.npp %>)</small> </td>
     <% end %>
 
-    <td><a href="file:///<%= spm.spm_base %>">SPM BASIC</a></td>
+    <td><a href="file://<%= spm.spm_base %>">SPM BASIC</a></td>
 
     <td>
         <% if spm.spm_mirror %>
-            <a href=file:///"<%= spm.spm_mirror %>">SPM MIRROR</a>
+            <a href=file://"<%= spm.spm_mirror %>">SPM MIRROR</a>
         <% end %>
     </td>
 
