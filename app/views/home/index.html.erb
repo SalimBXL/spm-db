@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <% if request.remote_ip == "127.0.0.1" %>
+    <% if @server_address == @client_address %>
       <div class="shadow card bg-default">
         <div class="card-body text-center">
           <h3><span class="material-icons">create_new_folder</span> New SPM</h3>        
@@ -56,5 +56,17 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="m-5  float-right mx-auto <%= (@server_address == @client_address) ? 'bg-success text-white' : 'bg-light text-dark' %>  text-center" style="width:400px">
+    <small>
+      <% unless @server_address == @client_address %>
+        Server address : <%= @server_address %>  -  Client address : <%= @client_address %>
+      <% else %>
+        Local Access. Admin mode.
+      <% end %>
+    </small>
   </div>
 </div>

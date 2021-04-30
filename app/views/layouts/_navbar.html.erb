@@ -14,7 +14,7 @@
             </a>
         </li>
 
-        <% if request.remote_ip == "127.0.0.1" %>
+        <% if @server_address == @client_address %>
             <li class="nav-item">
                 <a class="nav-link" href="<%= matlab_path %>"
                     data-toggle="tooltip" title="New SPM">
@@ -25,7 +25,7 @@
 
     </ul>
 
-    <% if request.remote_ip == "127.0.0.1" %>
+    <% if @server_address == @client_address %>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" style="float:right">
                 <a class="nav-link" href="<%= settings_path %>"
