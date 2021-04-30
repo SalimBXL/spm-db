@@ -7,9 +7,19 @@
     <% end %>
 
 
-    <td><%= link_to spm.spm_base.truncate(30), spm.spm_base, { target: '_blank' } %></td>
+    <td>
+        <%= link_to "Classic", 
+            spm.spm_base, 
+            { target: '_blank', class: 'btn btn-primary' } 
+        %>
+    </td>
 
-    <td><%= link_to spm.spm_mirror.truncate(30), spm.spm_mirror, { target: '_blank' } if spm.spm_mirror %></td>
+    <td>
+        <%= link_to "Mirror", 
+            spm.spm_mirror, 
+            { target: '_blank', class: 'btn btn-primary' } if spm.spm_mirror 
+        %>
+    </td>
 
 
 
