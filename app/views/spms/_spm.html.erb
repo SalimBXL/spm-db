@@ -22,26 +22,33 @@
     </td>
 
 
-
-    <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
-            data-toggle="tooltip" title="Edit spm">
-            <span class="material-icons">edit</span>
-        </a></td>
-
+    <!-- # PATIENT -->
     <% unless @patient %>
         <td><a href="<%= spms_path(patient_id: spm.patient_id) %>" class="btn btn-info btn-sm" role="button"
                 data-toggle="tooltip" title="Patient's SPMs">
                 <span class="material-icons">person</span>
-            </a></td>
+            </a>
+        </td>
     <% end %>
-    
-    <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
-            spm_path(spm),
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete spm for patient #{spm.patient_id} ?" },
-            class: "btn btn-danger btn-sm" 
-        %></td>
+
+    <% if @admin_mode %>
+        
+        <td><a href="<%= edit_spm_path(spm) %>" class="btn btn-info btn-sm" role="button"
+                data-toggle="tooltip" title="Edit spm">
+                <span class="material-icons">edit</span>
+            </a>
+        </td>
+        
+        <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
+                spm_path(spm),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete spm for patient #{spm.patient_id} ?" },
+                class: "btn btn-danger btn-sm" 
+            %>
+        </td>
+    <% end %>
+
 
     
 </tr>

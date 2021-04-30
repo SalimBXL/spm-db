@@ -3,6 +3,15 @@ class PatientsController < ApplicationController
 
     def index
         @patients = Patient.order(:fullname).page(params[:page])
+
+        # Local server and client IP addresses
+        @admin_mode = false
+        client_address = request.remote_ip
+        ips = Socket.ip_address_list
+        ips.each do |ip|
+            @admin_mode = true if ip.ip_address == client_address
+        end
+        
     end
 
     def show

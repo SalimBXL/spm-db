@@ -59,14 +59,3 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="m-5  float-right mx-auto <%= @admin_mode ? 'bg-success text-white' : 'bg-light text-dark' %>  text-center" style="width:400px">
-    <small>
-      <% unless @server_address == @client_address %>
-        Remote Access. User mode.
-      <% else %>
-        Local Access. Admin mode.
-      <% end %>
-    </small>
-  </div>
-</div>

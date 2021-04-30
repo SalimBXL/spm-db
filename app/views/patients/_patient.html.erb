@@ -13,18 +13,21 @@
 
     <td><%= patient.npp %></td>
 
-    <td><a href="<%= edit_patient_path(patient) %>" class="btn btn-info btn-sm" role="button"
-            data-toggle="tooltip" title="Edit patient">
-            <span class="material-icons">edit</span>
-        </a></td>
-    
-    <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
-            patient_path(patient),
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete patient #{patient.fullname} ?" },
-            class: "btn btn-danger btn-sm" 
-        %></td>
+    <% if @admin_mode %>
+        <td><a href="<%= edit_patient_path(patient) %>" class="btn btn-info btn-sm" role="button"
+                data-toggle="tooltip" title="Edit patient">
+                <span class="material-icons">edit</span>
+            </a></td>
+        
+        <td><%= link_to '<span class="material-icons" data-toggle="tooltip" title="Delete">clear</span>'.html_safe, 
+                patient_path(patient),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete patient #{patient.fullname} ?" },
+                class: "btn btn-danger btn-sm" 
+            %>
+        </td>
+    <% end %>
 
     <td><a href="<%= spms_path(patient_id: patient) %>" class="btn btn-info btn-sm" role="button"
             data-toggle="tooltip" title="View SPM's">

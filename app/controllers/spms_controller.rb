@@ -9,6 +9,16 @@ class SpmsController < ApplicationController
         else            
             @spms = Spm.order(:created_at).page(params[:page])
         end
+
+        
+        # Local server and client IP addresses
+        @admin_mode = false
+        client_address = request.remote_ip
+        ips = Socket.ip_address_list
+        ips.each do |ip|
+            @admin_mode = true if ip.ip_address == client_address
+        end
+
     end
 
     def new

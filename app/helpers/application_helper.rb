@@ -19,6 +19,7 @@ module ApplicationHelper
         File.join(depository, npp, formatted_date)
     end
 
+    
     private
 
     def format_date(date)
