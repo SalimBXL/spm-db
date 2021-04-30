@@ -14,7 +14,7 @@
             </a>
         </li>
 
-        <% if @server_address == @client_address %>
+        <% if @admin_mode %>
             <li class="nav-item">
                 <a class="nav-link" href="<%= matlab_path %>"
                     data-toggle="tooltip" title="New SPM">
@@ -25,7 +25,7 @@
 
     </ul>
 
-    <% if @server_address == @client_address %>
+    <% if @admin_mode %>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" style="float:right">
                 <a class="nav-link" href="<%= settings_path %>"
