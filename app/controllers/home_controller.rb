@@ -8,7 +8,7 @@ class HomeController < ApplicationController
         client_address = request.remote_ip
         ips = Socket.ip_address_list
         ips.each do |ip|
-            admin_mode = true if ip.ip_address == server_address
+            @admin_mode = true if ip.ip_address == client_address
         end
     end
     
