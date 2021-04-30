@@ -7,9 +7,9 @@
     <% end %>
 
 
-    <td><%= link_to spm.spm_base.truncate(30), root_url+'public/Database'+spm.spm_base, { target: '_blank' } %></td>
+    <td><%= link_to spm.spm_base.truncate(30), spm.spm_base, { target: '_blank' } %></td>
 
-    <td><%= link_to spm.spm_mirror.truncate(30), spm.spm_mirror if spm.spm_mirror %></td>
+    <td><%= link_to spm.spm_mirror.truncate(30), spm.spm_mirror, { target: '_blank' } if spm.spm_mirror %></td>
 
 
 
