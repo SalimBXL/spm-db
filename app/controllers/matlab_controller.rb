@@ -164,8 +164,8 @@ class MatlabController < ApplicationController
 
             # save 
             if (spms.length == 2)
-                base = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_base)
-                mirror = File.join(@depository, session[:patient_id], session[:study_date], @file_spm_mirror)
+                base = File.join('/public/Database', session[:patient_id], session[:study_date], @file_spm_base)
+                mirror = File.join('/public/Database', session[:patient_id], session[:study_date], @file_spm_mirror)
 
                 s = Spm.create(patient_id: indice_patient, study_date: session[:study_date], spm_base: base, spm_mirror: mirror)
 
