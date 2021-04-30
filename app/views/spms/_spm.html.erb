@@ -7,7 +7,7 @@
     <% end %>
 
 
-    <td><%= link_to spm.spm_base.truncate(30), "file://#{spm.spm_base}" %></td>
+    <td><%= link_to spm.spm_base.truncate(30), root_url+'spm_classic.pdf', { target: '_blank' } %></td>
 
     <td><%= link_to spm.spm_mirror.truncate(30), spm.spm_mirror if spm.spm_mirror %></td>
 
