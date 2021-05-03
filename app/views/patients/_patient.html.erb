@@ -8,7 +8,10 @@
         <% else %>
             <span class="material-icons text-warning">transgender</span>
         <% end %>
-        <%= patient.fullname %>
+
+        <% split = patient.fullname.split("^") %>
+        <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
+        <%= nom %>
     </td>
 
     <td><%= patient.npp %></td>
