@@ -28,6 +28,7 @@ class MatlabController < ApplicationController
 
             # dernier patient
             dernier_patient = find_orthanc_dernier_patient(patients[patients.length-1])
+            session[:orthanc_patient_id]
             patient_studies = dernier_patient["Studies"]
             dernier_patient = dernier_patient["MainDicomTags"]
 
@@ -198,13 +199,21 @@ class MatlabController < ApplicationController
 
     def remove_dicom_entry_ok
         @progression = get_progression(12, 13)
+        @res = false
+
+        # Vide le startup.m
         File.open(@startup_matlab, "w") do |f|
             f.puts("")
             f.close
         end
         startup = Dir.glob(@startup_matlab)
-        res = (startup.length == 1) ? true : false
+        res_ = (startup.length == 1) ? true : false
         @error_message = (startup.length == 1) ? nil : "Startup file not found (#{@startup_matlab})"
+
+        if res_  
+            # Supprime le patient du serveur DICOM
+            remove_patient = remove_orthanc_patient(session[:orthanc_patient_id])
+        end
     end
 
 
@@ -281,6 +290,13 @@ class MatlabController < ApplicationController
 
     def find_orthanc_study(id)
         request_api(File.join("http://127.0.0.1:8042/studies", id))
+    end
+
+    def remove_orthanc_patient(id)
+        comm = "curl -X DELETE http://127.0.0.1:8042/patient/#{id} ; wait"
+        @value = %x( #{@xterm} "#{comm}" )
+        @wasGood2 = $?
+        @res = true
     end
 
 end
