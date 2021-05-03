@@ -3,7 +3,12 @@
     <td><%=  I18n.localize(spm.study_date, format: "%d %B %Y") %></td>
 
     <% unless @patient %>
-        <td><%= spm.patient.fullname %> <small>(<%= spm.patient.npp %>)</small> </td>
+        <% pat = spm.patient %>
+        <td>
+            <% split = pat.fullname.split("^") %>
+            <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
+            <%= nom %> <small>(<%= pat.npp %>)</small> 
+        </td>
     <% end %>
 
 
