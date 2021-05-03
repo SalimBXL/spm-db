@@ -7,7 +7,7 @@ class SpmsController < ApplicationController
             @patient = Patient.find(params[:patient_id])
             @spms = Spm.where(patient_id: @patient.id).order(:created_at).page(params[:page]) if @patient
         else            
-            @spms = Spm.order(:created_at).page(params[:page])
+            @spms = Spm.order(:study_date).reverse_order.page(params[:page])
         end
 
         
