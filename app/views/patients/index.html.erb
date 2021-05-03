@@ -1,11 +1,13 @@
 <h1>Patients</h1>
 
-<p>
-    <a href="<%= new_patient_path %>" class="btn btn-secondary" role="button"
-        data-toggle="tooltip" title="New Patient">
-        <span class="material-icons">person_add</span>
-    </a>
-</p>
+<% if @admin_mode %>
+    <p>
+        <a href="<%= new_patient_path %>" class="btn btn-secondary" role="button"
+            data-toggle="tooltip" title="New Patient">
+            <span class="material-icons">person_add</span>
+        </a>
+    </p>
+<% end %>
 
 <div id="patients">
     <%= render 'patients' %>

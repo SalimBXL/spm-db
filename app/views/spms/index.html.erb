@@ -4,12 +4,14 @@
     <h3><%= @patient.fullname %></h3><br>
 <% end %>
 
-<p>
-    <a href="<%= new_spm_path %>" class="btn btn-secondary" role="button"
-        data-toggle="tooltip" title="New SPM">
-        <span class="material-icons">playlist_add</span>
-    </a>
-</p>
+<% if @admin_mode %>
+    <p>
+        <a href="<%= new_spm_path %>" class="btn btn-secondary" role="button"
+            data-toggle="tooltip" title="New SPM">
+            <span class="material-icons">playlist_add</span>
+        </a>
+    </p>
+<% end %>
 
 <div id="spms">
     <%= render 'spms' %>
