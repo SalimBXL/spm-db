@@ -212,7 +212,7 @@ class MatlabController < ApplicationController
 
         if res_  
             # Supprime le patient du serveur DICOM
-            remove_patient = remove_orthanc_patient(session[:orthanc_patient_id])
+            remove_orthanc_patient(session[:orthanc_patient_id])
         end
     end
 
@@ -296,6 +296,17 @@ class MatlabController < ApplicationController
         comm = "curl -X DELETE http://127.0.0.1:8042/patient/#{id} ; wait"
         @value = %x( #{@xterm} "#{comm}" )
         @wasGood2 = $?
+
+        puts "********************"
+        puts "********************"
+        puts "==> remove_orthanc_patient(#{id})"
+        puts "********************"
+        puts "COMM      : #{comm}"
+        puts "@VALUE    : #{@value}"
+        puts "@WASGOOD2 : #{@wasGood2}"
+        puts "********************"
+        puts "********************"
+
         @res = true
     end
 
