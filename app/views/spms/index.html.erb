@@ -1,7 +1,11 @@
 <h1>SPM's</h1>
 
 <% if @patient %>
-    <h3><%= @patient.fullname %></h3><br>
+    <h3>
+        <% split = patient.fullname.split("^") %>
+        <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
+        <%= nom %>
+    </h3><br>
 <% end %>
 
 <% if @admin_mode %>
