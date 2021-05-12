@@ -47,8 +47,8 @@
             <% @lasts.each do |last| %>
               <div class="col-sm-4">
                 <small>
-                <%= link_to "#{last.patient.fullname} (#{I18n.localize(last.study_date, format: '%d %B %Y')})", spms_path(patient_id: last.patient_id) %>
-                
+                <% nom = patient_split_fullname(last.patient) %>
+                <%= link_to "#{nom} (#{I18n.localize(last.study_date, format: '%d %B %Y')})".html_safe, spms_path(patient_id: last.patient_id) %>
                 </small>
               </div>
             <% end %>

@@ -5,9 +5,7 @@
     <% unless @patient %>
         <% pat = spm.patient %>
         <td>
-            <% split = pat.fullname.split("^") %>
-            <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
-            <%= nom %> <small>(<%= pat.npp %>)</small> 
+            <%= patient_split_fullname(pat) %> <small>(<%= pat.npp %>)</small> 
         </td>
     <% end %>
 

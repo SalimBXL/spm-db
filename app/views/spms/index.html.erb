@@ -2,9 +2,7 @@
 
 <% if @patient %>
     <h3>
-        <% split = @patient.fullname.split("^") %>
-        <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
-        <%= nom %>
+        <%= patient_split_fullname(@patient) %>
     </h3><br>
 <% end %>
 

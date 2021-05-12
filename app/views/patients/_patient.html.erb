@@ -11,7 +11,7 @@
 
         <% split = patient.fullname.split("^") %>
         <% nom = "#{split[0].upcase} #{split[1].titleize if split[1]}" %>
-        <%= nom %>
+        <%= patient_split_fullname(patient) %>
     </td>
 
     <td><%= patient.npp %></td>

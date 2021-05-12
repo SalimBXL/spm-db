@@ -19,6 +19,12 @@ module ApplicationHelper
         File.join(depository, npp, formatted_date)
     end
 
+    def patient_split_fullname(patient)
+        split = patient.fullname.split("^")
+        nom = "<strong>#{split[0].upcase}</strong> <em>#{split[1].titleize if split[1]}</em>"
+        nom.html_safe
+    end
+
     
     private
 
